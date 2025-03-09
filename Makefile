@@ -16,10 +16,12 @@ AVRDUDE = avrdude
 CFLAGS = -Wall -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU) -I.
 
 # 🔹 Source Files (Update to include subdirectories as needed)
-SRCS = main.c startupcode.c MCAL/GPIO/gpio.c
+SRCS = main.c startupcode.c MCAL/GPIO/gpio.c MCAL/USART/Atmega328pb_USART.c
 
 # 🔹 Linker Flags (Disable default startup files and libraries, use custom linker script)
-LDFLAGS = -nostartfiles -nodefaultlibs -T LinkerScript.ld
+LDFLAGS = -nostartfiles -nodefaultlibs -T LinkerScript.ld -lgcc
+
+
 
 # 🔹 Object Files
 OBJS = $(SRCS:.c=.o)

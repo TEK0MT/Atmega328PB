@@ -8,24 +8,18 @@
 #include "MCAL/USART/Atmega328pb_USART.h"	
 
 
-pin_config_t pin1 = {.port = PORTB_t,.Pin = PIN0_t,.direc = PIN_INPUT,.logic = LOGIC_LOW};
-pin_config_t pin2 = {.port = PORTB_t,.Pin = PIN1_t,.direc = PIN_OUTPUT,.logic = LOGIC_LOW};
-PIN_LOGIC_T logic = LOGIC_LOW;
+Usart_Type usart = {.data_size = EIGHT_BIT,.edge = Falling_Edge_Transmit,.clock_mode = ASYNCHRONOUSE_MODE,.mode = Master,.func = Transmitter,.selection = USART0,.baud_mode = BAUD_RATE_NORMAL,.rate = BAUD_9600,.stop_bit = USART_STOP_ONE_BIT,.parity = USART_ODD_PARITY};
+
 int main(void)
 {
     /* Replace with your application code */
-	GPIO_PIN_INIT(&pin1);
-	GPIO_PIN_INIT(&pin2);
-	
+	Usart_Init(&usart);
+	int i = 0;
     while (1) 
     {
-		GPIO_PIN_GET_LOGIC(&pin1,&logic);
-		if(logic == LOGIC_HIGH){
-		GPIO_PIN_WRITE_LOGIC(&pin2,LOGIC_HIGH);
-		}
-		else{
-		GPIO_PIN_WRITE_LOGIC(&pin2,LOGIC_LOW);
-		}
+		i = 0;
+		Usart_Send_DataBlocking(&usart,'H');
+		while(i++ < 100000);
     }
 }
 

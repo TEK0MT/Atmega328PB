@@ -10,6 +10,7 @@
 #define CORE_H_
 #include "../../Common/Std_Types.h"
 #include "../../Common/MacrosDef.h"
+#include <stdlib.h>
 #define F_CPU 16000000UL
 
 
